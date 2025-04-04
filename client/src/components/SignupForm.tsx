@@ -36,9 +36,8 @@ const [createUser, {error}] = useMutation(CREATE_USER);
       const { data } = await createUser({
         variables: { ...userFormData },
       });
-  
-      Auth.login(data.token);
-
+      console.log(data.createUser.token);
+      Auth.login(data.createUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);

@@ -6,6 +6,9 @@ import { ApolloServer } from '@apollo/server';// Note: Import from @apollo/serve
 import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './schemas/index.js';
 import { authenticateToken } from './services/auth.js';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const server = new ApolloServer({
   typeDefs,
@@ -28,7 +31,12 @@ const startApolloServer = async () => {
     }
   ));
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
   if (process.env.NODE_ENV === 'production') {
+    console.log("Running in production mode");
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
     app.get('*', (_req: Request, res: Response) => {

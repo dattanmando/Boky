@@ -37,7 +37,7 @@ const resolvers = {
 
 
   saveBook: async (_parent: any, args: { book: saveBookArgs }, context: any ) => {
-    console.log(context.user, 'context.user in saveBook resolver');
+    console.log(context, 'context.user in saveBook resolver');
     if (!context.user) {
       throw new Error('You need to be logged in!');
     }
